@@ -12,19 +12,27 @@
                     <th scope="col">Last Name</th>
                     <th scope="col">Courses</th>
                     <th> 
-                        <div class="btn-group">
-                                <button type="button" class="btn btn-success">Save</button>
-                                <button type="button" class="btn btn-info" (click)="addStudent()">Add</button>
+                        <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-success" (click)="saveStudent()">Save</button>
+                                <button type="button" class="btn btn-info" [disabled]="disableAddButton" (click)="addStudent()">Add</button>
                         </div>
                     </th>
                 </tr>
             </thead>
             <tbody class="thead-light">
                 <tr *ngFor="let student of studentArray; let i = index">
-                    <th scope="row">{{ student.id }}</th>
-                    <td>{{ student.firstName }}</td>
-                    <td>{{ student.lastName }}</td>
-                    <td>{{ student.course }}</td>
+                    <th *ngIf="!student.editMode" scope="row">{{ student.id }}</th>
+                    <td *ngIf="!student.editMode">{{ student.firstName }}</td>
+                    <td *ngIf="!student.editMode">{{ student.lastName }}</td>
+                    <td *ngIf="!student.editMode">{{ student.course }}</td>
+
+                    <th *ngIf="student.editMode" scope="row">
+                            <input [(ngModel)]="student.id" type="text" class="form-control" placeholder="ID">
+                        </th>
+                    <td *ngIf="student.editMode"><input [(ngModel)]="student.firstName" type="text" class="form-control" placeholder="firstName"></td>
+                    <td *ngIf="student.editMode"><input [(ngModel)]="student.lastName" type="text" class="form-control" placeholder="lastName"></td>
+                    <td *ngIf="student.editMode"><input [(ngModel)]="student.course" type="text" class="form-control" placeholder="course"></td>
+
                     <td><button type="button" class="btn btn-danger pull-right" (click)="removeStudent(i)">X</button></td>
                 </tr>
             </tbody>
