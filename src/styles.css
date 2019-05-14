@@ -1,3 +1,4 @@
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 *{
     margin: 0px;
     padding: 0px;
@@ -22,6 +23,7 @@
        display: grid;
        grid-template-columns: 1fr 5fr 2fr;
        height: 100%;
+       width: 100%;
 
    }
    .row-two{
